@@ -1,5 +1,7 @@
 from django.urls import include, path
 from .views import index, adminGames, administrador, carrito, deleteGame, deleteUser, descriptionGame, editarPerfil, forgetPassword, gatoRandom, login, msgVerificarEmail, register, suspendUser, userProfile, vistaCompras, vistaVender, vistaVentas
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', index, name='index'),
@@ -21,3 +23,6 @@ urlpatterns = [
     path('vistaVender', vistaVender, name='vistaVender'),
     path('vistaVentas', vistaVentas, name='vistaVentas'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

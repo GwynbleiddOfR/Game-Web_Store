@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Usuario
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def index(request):
@@ -8,7 +10,12 @@ def adminGames(request):
     return render(request,'gamewebstore/adminGames.html')
 
 def administrador(request):
-    return render(request,'gamewebstore/administrador.html')
+    users=Usuario.objects.all()
+    datos={
+        "usuarios":users
+    }
+
+    return render(request,'gamewebstore/administrador.html', datos)
 
 def carrito(request):
     return render(request,'gamewebstore/carrito.html')
