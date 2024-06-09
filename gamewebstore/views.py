@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario, Juego
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from .forms import UsuarioForm
 
 # Create your views here.
 def index(request):
@@ -50,7 +51,19 @@ def msgVerificarEmail(request):
     return render(request,'gamewebstore/msgVerificarEmail.html')
 
 def register(request):
-    return render(request,'gamewebstore/register.html')
+    form=UsuarioForm()
+
+    if request.method=="POST":
+        form=UsuarioForm(data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(to="administrador")
+            #Redirigir
+    
+    datos={
+        "form":form
+    }
+    return render(request,'gamewebstore/register.html', datos)
 
 def suspendUser(request):
     return render(request,'gamewebstore/suspendUser.html')
