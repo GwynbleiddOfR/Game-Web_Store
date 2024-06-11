@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Usuario, Juego
 from django.shortcuts import get_object_or_404, redirect
-from .forms import UsuarioForm
+from .forms import UsuarioForm, JuegoForm
 
 # Create your views here.
 def index(request):
@@ -75,7 +75,19 @@ def vistaCompras(request):
     return render(request,'gamewebstore/vistaCompras.html')
 
 def vistaVender(request):
-    return render(request,'gamewebstore/vistaVender.html')
+    form=JuegoForm()
+
+    if request.method=="POST":
+        form=JuegoForm(data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(to="adminGames")
+        
+    datos={
+        "form":form
+    }
+
+    return render(request,'gamewebstore/vistaVender.html', datos)
 
 def vistaVentas(request):
     return render(request,'gamewebstore/vistaVentas.html')

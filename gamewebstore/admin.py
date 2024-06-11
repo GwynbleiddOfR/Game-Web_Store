@@ -6,7 +6,7 @@ class AdmUsuario(admin.ModelAdmin):
     list_filter=['ciudad']
 
 class AdmJuego(admin.ModelAdmin):
-    list_display=['id', 'nomb_juego', 'genero', 'consola', 'precio', 'stock', 'descripcion', 'foto_juego']
+    list_display=['nomb_juego', 'genero', 'consola', 'precio', 'stock', 'descripcion', 'foto_juego']
     list_filter=['consola']
 
 class AdmPedido(admin.ModelAdmin):
