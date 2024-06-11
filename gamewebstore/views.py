@@ -5,7 +5,11 @@ from .forms import UsuarioForm, JuegoForm
 
 # Create your views here.
 def index(request):
-    return render(request,'gamewebstore/index.html')
+    games=Juego.objects.all()
+    datos={
+        "juegos":games
+    }
+    return render(request,'gamewebstore/index.html', datos)
 
 def adminGames(request):
     games=Juego.objects.all()
